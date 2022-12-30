@@ -3,6 +3,7 @@ package com.josue.example.superherolist
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.josue.example.superherolist.adapter.SuperHeroAdapter
 import com.josue.example.superherolist.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,9 +18,9 @@ class MainActivity : AppCompatActivity() {
         initRecyclerView()
     }
 
-    fun initRecyclerView() {
+    private fun initRecyclerView() {
         binding.rvSuperhero.layoutManager = LinearLayoutManager(this)
-        val adapater =  HeroAdapter(getSuperheros())
+        val adapater =  SuperHeroAdapter(SuperHeroProvider.superheroList)
         binding.rvSuperhero.adapter = adapater
     }
 
