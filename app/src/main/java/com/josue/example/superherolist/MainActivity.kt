@@ -1,9 +1,8 @@
 package com.josue.example.superherolist
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.josue.example.superherolist.adapter.SuperHeroAdapter
 import com.josue.example.superherolist.databinding.ActivityMainBinding
@@ -22,7 +21,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         val manager = LinearLayoutManager(this)
-        val decoration = DividerItemDecoration(this, manager.orientation)
         binding.rvSuperhero.layoutManager = manager
         val adapater =  SuperHeroAdapter(SuperHeroProvider.superheroList){
             superHero ->
@@ -31,7 +29,6 @@ class MainActivity : AppCompatActivity() {
             )
         }
         binding.rvSuperhero.adapter = adapater
-        binding.rvSuperhero.addItemDecoration(decoration)
     }
 
     fun onItemSelected(superHero: SuperHero){
