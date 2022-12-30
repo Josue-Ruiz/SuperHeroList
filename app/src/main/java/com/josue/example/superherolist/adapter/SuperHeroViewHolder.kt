@@ -10,7 +10,11 @@ import com.squareup.picasso.Picasso
 class SuperHeroViewHolder(view:View): RecyclerView.ViewHolder(view) {
     private val binding = ItemSuperheroBinding.bind(view)
 
-    fun render(superHeroModel: SuperHero, onClickListener: (SuperHero) -> Unit){
+    fun render(
+        superHeroModel: SuperHero,
+        onClickListener: (SuperHero) -> Unit,
+        onClickDelete: (Int) -> Unit
+    ){
         binding.tvRealName.text = superHeroModel.realName
         binding.tvSeuperHeroName.text = superHeroModel.superHeroName
         binding.tvPublisher.text = superHeroModel.publisher
@@ -20,6 +24,10 @@ class SuperHeroViewHolder(view:View): RecyclerView.ViewHolder(view) {
                 binding.ivHero.context,
                 "Selecccionaste a ${superHeroModel.realName}",
                 Toast.LENGTH_SHORT).show()
+        }
+
+        binding.btndelete.setOnClickListener {
+            onClickDelete(bindingAdapterPosition)
         }
 
         itemView.setOnClickListener { onClickListener(superHeroModel)}
