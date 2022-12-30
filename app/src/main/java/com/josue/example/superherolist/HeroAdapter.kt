@@ -3,6 +3,7 @@ package com.josue.example.superherolist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.josue.example.superherolist.databinding.ItemSuperheroBinding
 import com.squareup.picasso.Picasso
@@ -28,6 +29,9 @@ class HeroAdapter(val superhero: List<SuperHero>) : RecyclerView.Adapter<HeroAda
             binding.tvSeuperHeroName.text = superhero.superHeroName
             binding.tvPublisher.text = superhero.publisher
             Picasso.get().load(superhero.image).into(binding.ivHero)
+            binding.root.setOnClickListener {
+                Toast.makeText(view.context, "Selecccionaste a ${superhero.superHeroName}", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
