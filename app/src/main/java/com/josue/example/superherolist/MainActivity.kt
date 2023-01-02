@@ -13,13 +13,28 @@ class MainActivity : AppCompatActivity() {
     private var superHeroMutableList: MutableList<SuperHero> =
         SuperHeroProvider.superheroList.toMutableList()
     private lateinit var adapter: SuperHeroAdapter
+    private val lmanager = LinearLayoutManager(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        binding.btnaddSuper.setOnClickListener { createSuperHero()}
         initRecyclerView()
+    }
+
+    private fun createSuperHero() {
+        val url = "https://static.wikia.nocookie.net/lossimpson/images/1/16/Guy_Incognito.png/revision/latest?cb=20100401233011&path-prefix=es"
+        val superHero = SuperHero(
+            "Incognito",
+            "Empresa Privada",
+            "????????",
+            url)
+        superHeroMutableList.add(index = 3,superHero)
+        adapter.notifyItemInserted(3)
+        lmanager.scrollToPositionWithOffset(3,20)
+
     }
 
     private fun initRecyclerView() {
@@ -28,8 +43,7 @@ class MainActivity : AppCompatActivity() {
             onClickListener = { superHero -> onItemSelected(superHero) },
             onClickDelete = {position -> onDeleteItem(position)}
         )
-        val manager = LinearLayoutManager(this)
-        binding.rvSuperhero.layoutManager = manager
+        binding.rvSuperhero.layoutManager = lmanager
         binding.rvSuperhero.adapter = adapter
     }
 
