@@ -1,5 +1,6 @@
 package com.josue.example.superherolist.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,9 +8,9 @@ import com.josue.example.superherolist.R
 import com.josue.example.superherolist.SuperHero
 
 class SuperHeroAdapter(
-    private val superheroList:List<SuperHero>,
-    private val onClickListener:(SuperHero) -> Unit,
-    private val onClickDelete:(Int) -> Unit
+    private var superheroList: List<SuperHero>,
+    private val onClickListener: (SuperHero) -> Unit,
+    private val onClickDelete: (Int) -> Unit
 ) : RecyclerView.Adapter<SuperHeroViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuperHeroViewHolder {
@@ -23,4 +24,10 @@ class SuperHeroAdapter(
     }
 
     override fun getItemCount(): Int = superheroList.size
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateSuperHero(superheroList: List<SuperHero>) {
+        this.superheroList = superheroList
+        notifyDataSetChanged()
+    }
 }

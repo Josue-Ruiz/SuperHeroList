@@ -3,6 +3,7 @@ package com.josue.example.superherolist
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.josue.example.superherolist.adapter.SuperHeroAdapter
 import com.josue.example.superherolist.databinding.ActivityMainBinding
@@ -20,20 +21,28 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        binding.btnaddSuper.setOnClickListener { createSuperHero()}
+        binding.btnaddSuper.setOnClickListener { createSuperHero() }
+        binding.searchSuper.addTextChangedListener { userFilter ->
+            val superherosFiltered = superHeroMutableList.filter { superhero ->
+                superhero.superHeroName.lowercase().contains(userFilter.toString().lowercase())
+            }
+            adapter.updateSuperHero(superherosFiltered)
+        }
         initRecyclerView()
     }
 
     private fun createSuperHero() {
-        val url = "https://static.wikia.nocookie.net/lossimpson/images/1/16/Guy_Incognito.png/revision/latest?cb=20100401233011&path-prefix=es"
+        val url =
+            "https://static.wikia.nocookie.net/lossimpson/images/1/16/Guy_Incognito.png/revision/latest?cb=20100401233011&path-prefix=es"
         val superHero = SuperHero(
             "Incognito",
             "Empresa Privada",
             "????????",
-            url)
-        superHeroMutableList.add(index = 3,superHero)
+            url
+        )
+        superHeroMutableList.add(index = 3, superHero)
         adapter.notifyItemInserted(3)
-        lmanager.scrollToPositionWithOffset(3,20)
+        lmanager.scrollToPositionWithOffset(3, 20)
 
     }
 
@@ -41,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         adapter = SuperHeroAdapter(
             superheroList = superHeroMutableList,
             onClickListener = { superHero -> onItemSelected(superHero) },
-            onClickDelete = {position -> onDeleteItem(position)}
+            onClickDelete = { position -> onDeleteItem(position) }
         )
         binding.rvSuperhero.layoutManager = lmanager
         binding.rvSuperhero.adapter = adapter

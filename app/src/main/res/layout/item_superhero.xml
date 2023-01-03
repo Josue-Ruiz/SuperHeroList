@@ -38,9 +38,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
             android:textSize="18sp"
             android:textStyle="italic"
-            android:layout_marginTop="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivHero"
             app:layout_constraintTop_toBottomOf="@+id/tvSeuperHeroName"
@@ -62,10 +62,10 @@
             android:id="@+id/btndelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_delete"
             android:layout_margin="10dp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_delete"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

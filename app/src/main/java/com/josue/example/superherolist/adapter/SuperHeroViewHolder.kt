@@ -7,14 +7,14 @@ import com.josue.example.superherolist.SuperHero
 import com.josue.example.superherolist.databinding.ItemSuperheroBinding
 import com.squareup.picasso.Picasso
 
-class SuperHeroViewHolder(view:View): RecyclerView.ViewHolder(view) {
+class SuperHeroViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val binding = ItemSuperheroBinding.bind(view)
 
     fun render(
         superHeroModel: SuperHero,
         onClickListener: (SuperHero) -> Unit,
         onClickDelete: (Int) -> Unit
-    ){
+    ) {
         binding.tvRealName.text = superHeroModel.realName
         binding.tvSeuperHeroName.text = superHeroModel.superHeroName
         binding.tvPublisher.text = superHeroModel.publisher
@@ -23,13 +23,14 @@ class SuperHeroViewHolder(view:View): RecyclerView.ViewHolder(view) {
             Toast.makeText(
                 binding.ivHero.context,
                 "Selecccionaste a ${superHeroModel.realName}",
-                Toast.LENGTH_SHORT).show()
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
         binding.btndelete.setOnClickListener {
             onClickDelete(bindingAdapterPosition)
         }
 
-        itemView.setOnClickListener { onClickListener(superHeroModel)}
+        itemView.setOnClickListener { onClickListener(superHeroModel) }
     }
 }
