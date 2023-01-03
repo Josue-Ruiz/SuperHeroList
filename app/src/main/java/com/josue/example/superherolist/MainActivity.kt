@@ -1,8 +1,12 @@
 package com.josue.example.superherolist
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.josue.example.superherolist.adapter.SuperHeroAdapter
@@ -22,13 +26,42 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         binding.btnaddSuper.setOnClickListener { createSuperHero() }
+        configSwipe()
+        cinfigFilter()
+        initRecyclerView()
+    }
+
+    private fun configSwipe() {
+        binding.swipe.setColorSchemeColors(
+            ResourcesCompat.getColor(
+                resources,
+                R.color.purple_500,
+                null
+            )
+        )
+        binding.swipe.setProgressBackgroundColorSchemeColor(
+            ResourcesCompat.getColor(
+                resources,
+                R.color.teal_200,
+                null
+            )
+        )
+
+        binding.swipe.setOnRefreshListener {
+            Log.i("ConfigSwipe", "onRefresh")
+            Handler(Looper.getMainLooper()).postDelayed({
+                binding.swipe.isRefreshing = false
+            }, 2000)
+        }
+    }
+
+    private fun cinfigFilter() {
         binding.searchSuper.addTextChangedListener { userFilter ->
             val superherosFiltered = superHeroMutableList.filter { superhero ->
                 superhero.superHeroName.lowercase().contains(userFilter.toString().lowercase())
             }
             adapter.updateSuperHero(superherosFiltered)
         }
-        initRecyclerView()
     }
 
     private fun createSuperHero() {
