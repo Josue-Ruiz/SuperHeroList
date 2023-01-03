@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         binding.btnaddSuper.setOnClickListener { createSuperHero() }
         configSwipe()
-        cinfigFilter()
+        configFilter()
         initRecyclerView()
     }
 
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun cinfigFilter() {
+    private fun configFilter() {
         binding.searchSuper.addTextChangedListener { userFilter ->
             val superherosFiltered = superHeroMutableList.filter { superhero ->
                 superhero.superHeroName.lowercase().contains(userFilter.toString().lowercase())
